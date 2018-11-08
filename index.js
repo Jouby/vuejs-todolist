@@ -1,17 +1,10 @@
-
-
-Vue.component('todo-item', {
+var TodoItem = {
     props: ['item'],
     template: '<li>{{ item.text }}</li>'
-});
+};
 
 Vue.component('todo-list', {
     props: ['list'],
-    data: function() {
-        return  {
-            itemName: ''
-        }
-    },
     template: `
         <div>
             <h1>Todo list #{{list.id}}</h1>
@@ -21,21 +14,22 @@ Vue.component('todo-list', {
                     v-bind:item="item"
                     v-bind:key="item.id">
                 </todo-item>
-                <input type="text" @input="updateInput($event.target.value)" /><button v-on:click="add">Add item</button>
+                <input type="text" ref="input"/><button v-on:click="add">Add item</button>
             </ol>
         </div>`,
     methods: {
         add: function (event) {
-            this.list.data.push({ text: this.itemName });
-        },
-        updateInput (name) {
-            this.itemName = name;
+            this.list.data.push({ text: this.$refs.input.value });
+            this.$refs.input.value = '';
         }
+    },
+    components: {
+        'todo-item': TodoItem
     }
 });
 
 var app = new Vue({
-    el: '#app',
+    el: '#todolist-container',
     data: {
         count: 1,
         todoLists: []
