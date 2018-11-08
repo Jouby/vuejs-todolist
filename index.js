@@ -44,6 +44,12 @@ var app = new Vue({
         add: function (event) {
             this.todoLists.push({ id: this.count, data: []});
             this.count++;
+        },
+        remove: function (event) {
+            this.todoLists.pop();
+            if (this.count > 1) {
+                this.count--;
+            }
         }
     }
 });
