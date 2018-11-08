@@ -7,8 +7,10 @@ Vue.component('todo-item', {
 
 Vue.component('todo-list', {
     props: ['list'],
-    data: {
-        itemName: ''
+    data: function() {
+        return  {
+            itemName: ''
+        }
     },
     template: `
         <div>
@@ -19,12 +21,15 @@ Vue.component('todo-list', {
                     v-bind:item="item"
                     v-bind:key="item.id">
                 </todo-item>
-                <input v-model="itemName"><button v-on:click="add">Add item</button>
+                <input type="text" @input="updateInput($event.target.value)" /><button v-on:click="add">Add item</button>
             </ol>
         </div>`,
     methods: {
         add: function (event) {
-            this.list.push({ text: this.itemName });
+            this.list.data.push({ text: this.itemName });
+        },
+        updateInput (name) {
+            this.itemName = name;
         }
     }
 });
