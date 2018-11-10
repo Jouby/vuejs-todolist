@@ -1,0 +1,21 @@
+#todolist-container {
+    padding: 10px 20px;
+    max-width: initial;
+}
+
+#button-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.todolist {
+    border: 1px solid grey;
+    padding: 10px;
+    text-align: center;
+}
+
+.btn-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
